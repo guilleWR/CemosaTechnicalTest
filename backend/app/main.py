@@ -78,6 +78,15 @@ def update_todo_status(id: int, currentStatus: bool):
 
         save_todos(lista)
         return updated_todo
-                
-            
+
+
+@app.delete("/todos/remove/{id}")
+def remove_todo(id: int):
+    print("hola soy deletererere" + str(id))
+
+    todos = load_todos()
+    new_list = [todo for todo in todos if todo.id != id]
+    save_todos(new_list)
     
+
+

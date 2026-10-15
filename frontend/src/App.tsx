@@ -1,7 +1,7 @@
 // src/App.tsx
 import { useState } from "react";
 import type { Todo } from "./types/todo";
-import { getTodos, createTodo, toggleTodoStatus } from "./api/todo";
+import { getTodos, createTodo, toggleTodoStatus, removeTodo} from "./api/todo";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -24,6 +24,13 @@ function App() {
     toggleTodoStatus(id, todo.completed).then((updated) => {
       setTodos((prev) => prev.map((t) => (t.id === id ? updated : t)));
     });
+  };
+
+  const deleteTodo = async (id: number) => {
+    const todo = todos.find((t) => t.id === id);
+    if (!todo) return;
+    await removeTodo(id) 
+    loadTodos()
   };
 
   return (
@@ -57,7 +64,7 @@ function App() {
             <li
               key={todo.id}
               className={`flex items-center gap-2 bg-gray-50 p-3 rounded-lg border border-gray-200 ${
-                todo.completed ? "line-through text-gray-400" : ""
+                todo.completed ? "text-gray-400" : ""
               }`}
             >
               <input
@@ -66,7 +73,18 @@ function App() {
                 onChange={() => toggleTodo(todo.id)}
                 className="cursor-pointer"
               />
-              <span>{todo.title}</span>
+
+              <button
+                type="button"
+                className="cursor-pointer"
+                onClick={() => deleteTodo(todo.id)}
+              >
+                🗑️
+              </button>
+              
+              <span> 
+                {todo.title}
+              </span>
             </li>
           ))}
         </ul>
