@@ -1,5 +1,5 @@
 // src/App.tsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Todo } from "./types/todo";
 import { getTodos, createTodo, toggleTodoStatus, removeTodo} from "./api/todo";
 
@@ -13,17 +13,22 @@ function App() {
     });
   };
 
-  const addTodo = () => {
+  const addTodo = async () => {
     if (!title.trim()) return;
-    createTodo(title)
+    console.log("he creado" + title)
+    await createTodo(title)
+    loadTodos()
   };
 
   const toggleTodo = (id: number) => {
     const todo = todos.find((t) => t.id === id);
     if (!todo) return;
-    toggleTodoStatus(id, todo.completed).then((updated) => {
-      setTodos((prev) => prev.map((t) => (t.id === id ? updated : t)));
+    toggleTodoStatus(id, todo.completed).then(() => {
+      //setTodos((prev) => prev.map((t) => (t.id === id ? updated : t)));
+      // task 3 -The application should automatically fetch the todo list when:
+      loadTodos()
     });
+    
   };
 
   const deleteTodo = async (id: number) => {
@@ -33,8 +38,15 @@ function App() {
     loadTodos()
   };
 
+   //When rendering the page, fetch all todos
+  useEffect(() => {
+    loadTodos();
+  }, []);
+
   return (
+    
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+      
       <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-2xl">
         <h1 className="text-2xl font-bold mb-4 text-gray-800">ToDo List</h1>
 

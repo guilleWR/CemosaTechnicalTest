@@ -17,10 +17,10 @@ The goal is to demonstrate your understanding of the codebase and your ability t
    - [X] Implement the backend API endpoint to handle task deletion.
 
 3. **Auto-load Tasks**. The application should automatically fetch the todo list when:
-   - [ ] The page loads.
-   - [ ] The user adds a new task.
+   - [X] The page loads.
+   - [X] The user adds a new task.
    - [X] The user deletes a task.
-   - [ ] The user marks a task as completed.
+   - [X] The user marks a task as completed.
 
 4. **Add Descriptions and Favorite Tasks Section**
    - [ ] Add a description field to each task.

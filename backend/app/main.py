@@ -55,7 +55,10 @@ def add_todo(todo: Todo):
         todo (Todo): The todo to add.
     """
     todos = load_todos()
+
+    todo.id = todos[-1].id + 1
     todos.append(todo)
+    
     save_todos(todos)
     return todo
 
@@ -82,8 +85,6 @@ def update_todo_status(id: int, currentStatus: bool):
 
 @app.delete("/todos/remove/{id}")
 def remove_todo(id: int):
-    print("hola soy deletererere" + str(id))
-
     todos = load_todos()
     new_list = [todo for todo in todos if todo.id != id]
     save_todos(new_list)

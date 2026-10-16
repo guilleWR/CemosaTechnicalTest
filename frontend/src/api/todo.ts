@@ -9,12 +9,14 @@ export const getTodos = async (): Promise<Todo[]> => {
 };
 
 export const createTodo = async (title: string): Promise<void> => {
+  console.log("holiiiii")
   await fetch(BASE_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ title, completed: false }),
+    
+    body: JSON.stringify({id: 0, title, completed: false, }),
   });
 };
 
