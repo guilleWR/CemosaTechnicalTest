@@ -21,7 +21,11 @@ app.add_middleware(
 class Todo(BaseModel):
     id: int 
     title: str
+    desc: str = ""
     completed: bool = False
+
+class descriptionUpdate(BaseModel):
+    description: str
 
 
 def load_todos() -> list[Todo]:
@@ -58,7 +62,7 @@ def add_todo(todo: Todo):
 
     todo.id = todos[-1].id + 1
     todos.append(todo)
-    
+
     save_todos(todos)
     return todo
 
@@ -90,4 +94,15 @@ def remove_todo(id: int):
     save_todos(new_list)
     
 
+@app.put("/todos/desc/{id}")
+def update_todo_description(id: int, data: descriptionUpdate):
+    print("soy " + str(id) +  "y quiero ser desc=  " + data.description)
+
+    todos = load_todos()
+    for todo in todos:
+        if todo.id == id:
+            todo.desc = data.description
+            break
+
+    save_todos(todos)
 

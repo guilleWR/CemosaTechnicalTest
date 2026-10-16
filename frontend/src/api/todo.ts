@@ -9,14 +9,13 @@ export const getTodos = async (): Promise<Todo[]> => {
 };
 
 export const createTodo = async (title: string): Promise<void> => {
-  console.log("holiiiii")
   await fetch(BASE_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     
-    body: JSON.stringify({id: 0, title, completed: false, }),
+    body: JSON.stringify({id: 0, desc: "", title, completed: false, }),
   });
 };
 
@@ -24,7 +23,6 @@ export const toggleTodoStatus = async (
   id: number,
   currentStatus: boolean
 ): Promise<Todo> => {
-  console.log("HOLA" + id)
   const res = await fetch(`${BASE_URL}/${id}/${currentStatus}`, {
     method: "PATCH",
     headers: {
@@ -42,4 +40,15 @@ export const removeTodo = async (id: number): Promise<void> => {
   await fetch(`${BASE_URL}/remove/${id}`, {
     method: "DELETE",
   });
+};
+
+
+export const updateTodoDesc = async (id: number, description: string): Promise<void> => {
+  const res = await fetch(`${BASE_URL}/desc/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ description }),
+  });
+
+  if (!res.ok) throw new Error("Error al guardar la descripción");
 };
