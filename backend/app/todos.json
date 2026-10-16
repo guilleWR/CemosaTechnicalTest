@@ -17,7 +17,7 @@
     "id": 3,
     "title": "Learn Vite",
     "desc": " ",
-    "completed": false,
+    "completed": true,
     "favourite": false
   },
   {
@@ -54,5 +54,12 @@
     "desc": "I wish myself good luck!",
     "completed": false,
     "favourite": true
+  },
+  {
+    "id": 9,
+    "title": "que guay",
+    "desc": "oleeee",
+    "completed": false,
+    "favourite": false
   }
 ]

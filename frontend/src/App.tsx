@@ -10,6 +10,8 @@ function App() {
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
   const [descriptionDraft, setDescriptionDraft] = useState("");
 
+  const [watchFavs, setWatchFavs] = useState(false)
+
    //When rendering the page, fetch all todos
   useEffect(() => {
     loadTodos();
@@ -86,6 +88,40 @@ function App() {
       </div>
     )}
 
+    {watchFavs && (
+      <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-lg">
+
+           <ul className="space-y-2">
+              {todos.filter(todo => todo.favourite)
+              .map((todo) => (
+                <li
+                  key={todo.id}
+                  className={`flex items-center gap-2 bg-gray-50 p-3 rounded-lg border border-gray-200 ${
+                    todo.completed ? "text-gray-400" : "" 
+                  }`}
+                >
+                    <span> 
+                      {todo.title}
+                    </span>
+                </li>
+              ))}
+            </ul>
+
+
+
+           
+            <div className="flex justify-end mt-2">
+              <button className="cursor-pointer" onClick={() => setWatchFavs(false)}>
+                Back
+              </button>
+            </div>
+          
+        </div>
+      </div>
+
+    )}
+
       <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-2xl">
         <h1 className="text-2xl font-bold mb-4 text-gray-800">ToDo List</h1>
 
@@ -108,14 +144,19 @@ function App() {
           >
             Load Tasks
           </button>
+          <button
+            onClick={() => setWatchFavs(prev => !prev)}
+            className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition cursor-pointer"
+          >
+            See Favourites
+          </button>
         </div>
 
         <ul className="space-y-2">
           {todos.map((todo) => (
             <li
               key={todo.id}
-              className={`flex items-center gap-2 bg-gray-50 p-3 rounded-lg border border-gray-200 ${
-                todo.completed ? "text-gray-400" : "" 
+              className={`flex items-center gap-2 bg-gray-50 p-3 rounded-lg border border-gray-200
               }`}
             >
               <input
@@ -125,39 +166,40 @@ function App() {
                 className="cursor-pointer"
               />
 
-              <button
-                type="button"
-                className="cursor-pointer"
-                onClick={() => deleteTodo(todo.id)}
-              >
-                🗑️
-              </button>
-
-              <button 
-                type="button"
-                className="cursor-pointer border border-blue-300 px-3 py-2 rounded"
-                onClick={() => {
-                  setSelectedTodo(todo);
-                  setDescriptionDraft(todo.desc ?? "");
-                }}>
-                Desc 
-              </button>
-              
-
-              <button
-                type="button"
-                className="cursor-pointer border border-blue-300 px-3 py-2 rounded"
-                onClick={() => updateTodoFavourite(todo.id)}
-              >
-                {todo.favourite ? "Unmark Fav" : "Mark as Fav"}
-              </button>
-
-
-              
-              
-              <span> 
+      
+              <span className={todo.completed ? "text-gray-400" : ""}> 
                 {todo.title}
               </span>
+
+              <div className="ml-auto flex items-center gap-2">
+                
+
+                <button 
+                  type="button"
+                  className="cursor-pointer border border-blue-300 px-3 py-2 rounded"
+                  onClick={() => {
+                    setSelectedTodo(todo);
+                    setDescriptionDraft(todo.desc ?? "");
+                  }}>
+                  Desc 
+                </button>
+                
+                <button
+                  type="button"
+                  className="cursor-pointer border border-blue-300 px-3 py-2 rounded"
+                  onClick={() => updateTodoFavourite(todo.id)}
+                >
+                  {todo.favourite ? "Unmark Fav" : "Mark as Fav"}
+                </button>
+
+                <button
+                  type="button"
+                  className="cursor-pointer"
+                  onClick={() => deleteTodo(todo.id)}
+                >
+                  🗑️
+                </button>
+              </div>
             </li>
           ))}
         </ul>
