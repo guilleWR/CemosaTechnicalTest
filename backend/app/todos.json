@@ -3,48 +3,56 @@
     "id": 1,
     "title": "Learn React",
     "desc": "This is react!",
-    "completed": true
+    "completed": true,
+    "favourite": false
   },
   {
     "id": 2,
     "title": "Learn TypeScript",
     "desc": " ",
-    "completed": true
+    "completed": true,
+    "favourite": false
   },
   {
     "id": 3,
     "title": "Learn Vite",
     "desc": " ",
-    "completed": false
+    "completed": false,
+    "favourite": false
   },
   {
     "id": 4,
     "title": "Learn FastAPI",
     "desc": "FastAPI is so nice! ",
-    "completed": false
+    "completed": false,
+    "favourite": false
   },
   {
     "id": 5,
     "title": "Learn Docker",
     "desc": " ",
-    "completed": false
+    "completed": false,
+    "favourite": false
   },
   {
     "id": 6,
     "title": "Learn PostgreSQL",
     "desc": " ",
-    "completed": false
+    "completed": false,
+    "favourite": false
   },
   {
     "id": 7,
     "title": "Learn Tailwind CSS",
     "desc": " ",
-    "completed": false
+    "completed": false,
+    "favourite": false
   },
   {
     "id": 8,
     "title": "Work at Cemosa :)",
     "desc": "I wish myself good luck!",
-    "completed": false
+    "completed": false,
+    "favourite": true
   }
 ]

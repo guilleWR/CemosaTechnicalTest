@@ -1,14 +1,13 @@
 // src/App.tsx
 import { useState, useEffect } from "react";
 import type { Todo } from "./types/todo";
-import { getTodos, createTodo, toggleTodoStatus, removeTodo, updateTodoDesc} from "./api/todo";
+import { getTodos, createTodo, toggleTodoStatus, removeTodo, updateTodoDesc, updateTodoFav} from "./api/todo";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [title, setTitle] = useState("");
 
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
-  const[description, toggleDescription] = useState(false)
   const [descriptionDraft, setDescriptionDraft] = useState("");
 
    //When rendering the page, fetch all todos
@@ -52,11 +51,16 @@ function App() {
     loadTodos()
   }
 
+  const updateTodoFavourite = async (id: number) => {
+    await updateTodoFav(id)
+    loadTodos()
+  }
   
 
   return (
       
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+          
           {selectedTodo && (
       <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-lg">
@@ -81,9 +85,6 @@ function App() {
         </div>
       </div>
     )}
-
-
-
 
       <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-2xl">
         <h1 className="text-2xl font-bold mb-4 text-gray-800">ToDo List</h1>
@@ -136,12 +137,21 @@ function App() {
                 type="button"
                 className="cursor-pointer border border-blue-300 px-3 py-2 rounded"
                 onClick={() => {
-                  toggleDescription(prev => !prev)
                   setSelectedTodo(todo);
                   setDescriptionDraft(todo.desc ?? "");
                 }}>
-                Desc
+                Desc 
               </button>
+              
+
+              <button
+                type="button"
+                className="cursor-pointer border border-blue-300 px-3 py-2 rounded"
+                onClick={() => updateTodoFavourite(todo.id)}
+              >
+                {todo.favourite ? "Unmark Fav" : "Mark as Fav"}
+              </button>
+
 
               
               

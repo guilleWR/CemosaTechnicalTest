@@ -15,7 +15,7 @@ export const createTodo = async (title: string): Promise<void> => {
       "Content-Type": "application/json",
     },
     
-    body: JSON.stringify({id: 0, desc: "", title, completed: false, }),
+    body: JSON.stringify({id: 0, desc: "", title, completed: false, favourite: false}),
   });
 };
 
@@ -48,6 +48,15 @@ export const updateTodoDesc = async (id: number, description: string): Promise<v
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ description }),
+  });
+
+  if (!res.ok) throw new Error("Error al guardar la descripción");
+};
+
+
+export const updateTodoFav = async (id: number): Promise<void> => {
+  const res = await fetch(`${BASE_URL}/fav/${id}`, {
+    method: "PUT",
   });
 
   if (!res.ok) throw new Error("Error al guardar la descripción");

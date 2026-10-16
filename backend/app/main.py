@@ -23,6 +23,7 @@ class Todo(BaseModel):
     title: str
     desc: str = ""
     completed: bool = False
+    favourite: bool = False
 
 class descriptionUpdate(BaseModel):
     description: str
@@ -102,6 +103,16 @@ def update_todo_description(id: int, data: descriptionUpdate):
     for todo in todos:
         if todo.id == id:
             todo.desc = data.description
+            break
+
+    save_todos(todos)
+
+@app.put("/todos/fav/{id}")
+def update_todo_favourite(id: int):
+    todos = load_todos()
+    for todo in todos:
+        if todo.id == id:
+            todo.favourite = not todo.favourite # inverse
             break
 
     save_todos(todos)
