@@ -75,12 +75,12 @@ function App() {
           />
           <div className="flex gap-2">
             <button className="cursor-pointer" onClick={() => setSelectedTodo(null)}>
-            Cancelar
+            Back
             </button>
 
             <button className="cursor-pointer" 
             onClick={() => updateTodoDescription(selectedTodo.id, descriptionDraft ?? " ")}>
-              guardar
+              Save
             </button>
           </div>
           
@@ -108,9 +108,6 @@ function App() {
               ))}
             </ul>
 
-
-
-           
             <div className="flex justify-end mt-2">
               <button className="cursor-pointer" onClick={() => setWatchFavs(false)}>
                 Back

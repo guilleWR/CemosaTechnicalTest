@@ -2,14 +2,14 @@
   {
     "id": 1,
     "title": "Learn React",
-    "desc": "This is react!",
+    "desc": "This is react! asdfasfasdf",
     "completed": true,
     "favourite": false
   },
   {
     "id": 2,
     "title": "Learn TypeScript",
-    "desc": " ",
+    "desc": "I love Typescript!",
     "completed": true,
     "favourite": false
   },
@@ -17,7 +17,7 @@
     "id": 3,
     "title": "Learn Vite",
     "desc": " ",
-    "completed": true,
+    "completed": false,
     "favourite": false
   },
   {
@@ -54,12 +54,5 @@
     "desc": "I wish myself good luck!",
     "completed": false,
     "favourite": true
-  },
-  {
-    "id": 9,
-    "title": "que guay",
-    "desc": "oleeee",
-    "completed": false,
-    "favourite": false
   }
 ]

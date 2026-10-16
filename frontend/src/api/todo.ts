@@ -37,14 +37,14 @@ export const toggleTodoStatus = async (
 ///////////////////////
 
 export const removeTodo = async (id: number): Promise<void> => {
-  await fetch(`${BASE_URL}/remove/${id}`, {
+  await fetch(`${BASE_URL}/${id}`, {
     method: "DELETE",
   });
 };
 
 
 export const updateTodoDesc = async (id: number, description: string): Promise<void> => {
-  const res = await fetch(`${BASE_URL}/desc/${id}`, {
+  const res = await fetch(`${BASE_URL}/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ description }),
@@ -55,8 +55,8 @@ export const updateTodoDesc = async (id: number, description: string): Promise<v
 
 
 export const updateTodoFav = async (id: number): Promise<void> => {
-  const res = await fetch(`${BASE_URL}/fav/${id}`, {
-    method: "PUT",
+  const res = await fetch(`${BASE_URL}/${id}`, {
+    method: "PATCH",
   });
 
   if (!res.ok) throw new Error("Error al guardar la descripción");
